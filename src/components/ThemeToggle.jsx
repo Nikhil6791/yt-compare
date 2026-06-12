@@ -15,14 +15,12 @@ const ThemeToggle = () => {
   }, [dark]);
 
   return (
-    <div className="bg-white h-screen w-screen dark:bg-black text-black dark:text-white">
-      <button
-        className="bg-purple-600 text-white font-semibold cursor-pointer mt-2 ml-2 rounded-xl px-7 py-2 "
+    <button
+        className="bg-purple-600  font-semibold cursor-pointer mt-2 ml-2 rounded-xl px-7 py-2 "
         onClick={() => setDark(!dark)}
       >
         Toggle
       </button>
-    </div>
   );
 };
 
