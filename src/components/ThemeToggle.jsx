@@ -1,26 +1,19 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+import { Sun, Moon } from "lucide-react";
 
 const ThemeToggle = () => {
-  const [dark, setDark] = useState(localStorage.getItem("theme") === "dark");
-
-  useEffect(() => {
-    if (dark) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [dark]);
+  const { dark, setDark } = useContext(ThemeContext);
 
   return (
-    <button
-        className="bg-purple-600  font-semibold cursor-pointer mt-2 ml-2 rounded-xl px-7 py-2 "
+    <div className="flex justify-end items-center px-6 py-3 border-b border-gray-600">
+      <button
+        className=" flex justify-center items-center border border-gray-500 font-semibold cursor-pointer rounded-full w-12 h-12"
         onClick={() => setDark(!dark)}
       >
-        Toggle
+        {dark ? <Sun /> : <Moon />}
       </button>
+    </div>
   );
 };
 
