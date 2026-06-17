@@ -2,7 +2,7 @@ import ThemeToggle from "./ThemeToggle";
 
 function Layout({ children }) {
   return (
-    <div className="bg-white h-screen w-screen dark:bg-black text-black dark:text-white">
+    <div className="bg-white min-h-screen w-full dark:bg-black text-black dark:text-white flex flex-col">
       <ThemeToggle />
       {children}
     </div>
