@@ -12,3 +12,15 @@ export const videoCardData = {
   title: "Youtube Videos",
   description: "Compare view counts and performance",
 };
+
+export const channelSearchData = {
+  title: "Select Two Channels Two Compare",
+  firstInputLabel: "First Channel",
+  secondInputLabel: "Second Channel",
+};
+
+export const videoSearchData = {
+  title: "Select Two Video Two Compare",
+  firstInputLabel: "First Video",
+  secondInputLabel: "Second Video",
+};
