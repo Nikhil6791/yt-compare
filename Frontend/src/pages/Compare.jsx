@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Card from "../components/Card";
-import { channelCardData, videoCardData } from "../data";
+import { channelCardData, videoCardData, channelSearchData } from "../data";
 import ComparisionDetails from "../components/ComparisionDetails";
 const Compare = () => {
-  const [comparisionData, setComparisionData] = useState(channelCardData);
+  const [comparisionData, setComparisionData] = useState(channelSearchData);
+  console.log("Component rendered");
   return (
     <div className="flex-1 flex justify-center items-center ">
       <div className="border flex justify-center items-center flex-col border-gray-400 rounded-xl">

@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
+import { YTProvider } from "./context/yt.context.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <App />
+        <YTProvider>
+          <App />
+        </YTProvider>
       </ThemeProvider>
     </BrowserRouter>
   </StrictMode>,
