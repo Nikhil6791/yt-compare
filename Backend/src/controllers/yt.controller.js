@@ -1,16 +1,16 @@
 import axios from "axios";
 
 export async function fetchVideoData(req, res) {
-  const { id } = req.body;
+  // console.log("REQ", req.params);
+  const { id } = req.params;
   console.log(id);
-
   try {
     const response = await axios.get(
       "https://www.googleapis.com/youtube/v3/videos",
       {
         params: {
           part: "statistics, snippet",
-          id: id,
+          id: req.params.id,
           key: process.env.YOUTUBE_API_KEY,
         },
       },

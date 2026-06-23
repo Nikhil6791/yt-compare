@@ -3,11 +3,11 @@ import { createContext, useState } from "react";
 export const YTContext = createContext();
 
 export const YTProvider = ({ children }) => {
-  const [firstVideoData, setFirstVideoData] = useState(null);
-  const [secondVideoData, setSecondVideoData] = useState(null);
+  const [firstVideoData, setFirstVideoData] = useState([]);
+  const [secondVideoData, setSecondVideoData] = useState([]);
 
-  const [firstChannelData, setFirstChannelData] = useState(null);
-  const [secondChannelData, setSecondChannelData] = useState(null);
+  const [firstChannelData, setFirstChannelData] = useState([]);
+  const [secondChannelData, setSecondChannelData] = useState([]);
 
   return (
     <YTContext.Provider

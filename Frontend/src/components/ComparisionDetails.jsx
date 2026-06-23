@@ -1,27 +1,36 @@
 import React, { useState } from "react";
 import SearchIcon from "@iconify-react/material-symbols/search";
 import axios from "axios";
+import { useYT } from "../hooks/useYt.js";
 const ComparisionDetails = ({ props }) => {
   const [firstInput, setFirstInput] = useState("");
   const [secondInput, setSecondInput] = useState("");
-  // console.log(firstInput, secondInput);
+  // console.log(secondInput);
+  console.log(firstInput);
+  console.log(secondInput);
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  // const fetchDataFromYoutubeApi = async () => {
-  //   const response = await axios.get(
-  //     "https://www.googleapis.com/youtube/v3/videos",
-  //     {
-  //       params: {
-  //         part: "statistics, snippet",
-  //         id: "ysRrzG8MU_M",
-  //         key: "AIzaSyAMmYFi_UoJphU5wh3IKffNyGeU0BzEEUk",
-  //       },
-  //     },
-  //   );
 
-  //   console.log(response.data);
-  // };
+  const { handleYTVideoData } = useYT();
+
+  const handleYTVideoDataCaller = async (type) => {
+    // let input = type === "first" ? firstInput : secondInput;
+    // console.log("Input", input);
+
+    let input;
+    if (type === "first") {
+      input = firstInput;
+    } else {
+      input = secondInput;
+    }
+
+    console.log("Input", input);
+    let linkArr = input.split("/");
+    let id = linkArr[linkArr.length - 1].split("?")[0];
+    console.log("Click Function", id);
+    await handleYTVideoData({ id, type });
+  };
 
   return (
     <div className="flex justify-center items-center flex-col ">
@@ -48,7 +57,8 @@ const ComparisionDetails = ({ props }) => {
                 }}
               />
               <button
-                onClick={fetchDataFromYoutubeApi}
+                type="button"
+                onClick={() => handleYTVideoDataCaller("first")}
                 className="bg-blue-600 cursor-pointer px-6 py-2 absolute right-2  rounded-2xl"
               >
                 Search
@@ -59,7 +69,7 @@ const ComparisionDetails = ({ props }) => {
             <label htmlFor="secondChannel">{props.secondInputLabel}</label>
             <div className="relative flex justify-around items-center">
               <input
-                onChange={(e) => setSeondInput(e.target.value)}
+                onChange={(e) => setSecondInput(e.target.value)}
                 className="px-22 py-4 outline-none border border-gray-300 rounded-xl"
                 type="text"
                 placeholder="Search for channel"
@@ -73,7 +83,11 @@ const ComparisionDetails = ({ props }) => {
                 }}
               />
 
-              <button className="bg-blue-600 absolute cursor-pointer px-6 py-2 right-2 rounded-2xl">
+              <button
+                type="button"
+                onClick={() => handleYTVideoDataCaller("second")}
+                className="bg-blue-600 absolute cursor-pointer px-6 py-2 right-2 rounded-2xl"
+              >
                 Search
               </button>
             </div>

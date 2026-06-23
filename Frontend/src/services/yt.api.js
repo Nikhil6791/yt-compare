@@ -5,20 +5,16 @@ const api = axios.create({
   withCredentials: true,
 });
 
-const fetchDataFromYoutubeApi = async ({ id }) => {
+export const fetchDataFromYoutubeApi = async ({ id }) => {
+  console.log("Id", id);
   try {
-    const response = await api.post(
-      "/video",
-
-      {
-        id,
-      },
-    );
+    const response = await api.get(`/video/${id}`);
 
     return response.data;
   } catch (error) {
     console.log(error);
+    // console.log(error.response.data.error.errors);
   }
 
-  console.log(response.data);
+  // console.log(response.data);
 };
