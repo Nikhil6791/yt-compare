@@ -8,20 +8,20 @@ const ComparisionDetails = ({ props }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  const fetchDataFromYoutubeApi = async () => {
-    const response = await axios.get(
-      "https://www.googleapis.com/youtube/v3/videos",
-      {
-        params: {
-          part: "statistics, snippet",
-          id: "ysRrzG8MU_M",
-          key: "AIzaSyAMmYFi_UoJphU5wh3IKffNyGeU0BzEEUk",
-        },
-      },
-    );
+  // const fetchDataFromYoutubeApi = async () => {
+  //   const response = await axios.get(
+  //     "https://www.googleapis.com/youtube/v3/videos",
+  //     {
+  //       params: {
+  //         part: "statistics, snippet",
+  //         id: "ysRrzG8MU_M",
+  //         key: "AIzaSyAMmYFi_UoJphU5wh3IKffNyGeU0BzEEUk",
+  //       },
+  //     },
+  //   );
 
-    console.log(response.data);
-  };
+  //   console.log(response.data);
+  // };
 
   return (
     <div className="flex justify-center items-center flex-col ">
