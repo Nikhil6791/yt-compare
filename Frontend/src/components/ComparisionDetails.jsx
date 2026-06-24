@@ -6,17 +6,29 @@ import { useContext } from "react";
 import { YTContext } from "../context/yt.context.jsx";
 import VideoDetail from "./VideoDetail.jsx";
 import VideoData from "./VideoData.jsx";
+import { useNavigate } from "react-router-dom";
+
 const ComparisionDetails = ({ props }) => {
   const [firstInput, setFirstInput] = useState("");
   const [secondInput, setSecondInput] = useState("");
   const [isClicked, setIsClicked] = useState(false);
-
+  const navigate = useNavigate();
   const context = useContext(YTContext);
-  const { firstVideoData, secondVideoData } = context;
+  const {
+    firstVideoData,
+    secondVideoData,
+    setFirstVideoData,
+    setSecondVideoData,
+  } = context;
   // console.log(secondInput);
   console.log({ firstVideoData });
+
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const resetAll = () => {
+    navigate("/compare");
   };
 
   const { handleYTVideoData } = useYT();
@@ -118,7 +130,10 @@ const ComparisionDetails = ({ props }) => {
             {props.buttonTitle}
           </button>
 
-          <button className="border font-semibold border-gray-400 hover:bg-gray-600 cursor-pointer rounded-xl px-5 py-2">
+          <button
+            onClick={resetAll}
+            className="border font-semibold border-gray-400 hover:bg-gray-600 cursor-pointer rounded-xl px-5 py-2"
+          >
             Reset
           </button>
         </div>

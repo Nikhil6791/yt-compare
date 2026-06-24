@@ -4,10 +4,9 @@ const VideoData = ({ props }) => {
   const { items } = props;
   return (
     <div className="border border-gray-500 flex flex-col rounded-2xl">
-      {items.map((elem) => {
+      {items?.map((elem) => {
         return (
           <div className="p-2 ">
-            
             <p>Views: {elem.statistics.viewCount}</p>
             <p>Likes: {elem.statistics.likeCount}</p>
             <p>Comments: {elem.statistics.commentCount}</p>
