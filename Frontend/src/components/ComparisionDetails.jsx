@@ -2,12 +2,19 @@ import React, { useState } from "react";
 import SearchIcon from "@iconify-react/material-symbols/search";
 import axios from "axios";
 import { useYT } from "../hooks/useYt.js";
+import { useContext } from "react";
+import { YTContext } from "../context/yt.context.jsx";
+import VideoDetail from "./VideoDetail.jsx";
+import VideoData from "./VideoData.jsx";
 const ComparisionDetails = ({ props }) => {
   const [firstInput, setFirstInput] = useState("");
   const [secondInput, setSecondInput] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
+
+  const context = useContext(YTContext);
+  const { firstVideoData, secondVideoData } = context;
   // console.log(secondInput);
-  console.log(firstInput);
-  console.log(secondInput);
+  console.log({ firstVideoData });
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -25,10 +32,8 @@ const ComparisionDetails = ({ props }) => {
       input = secondInput;
     }
 
-    console.log("Input", input);
     let linkArr = input.split("/");
     let id = linkArr[linkArr.length - 1].split("?")[0];
-    console.log("Click Function", id);
     await handleYTVideoData({ id, type });
   };
 
@@ -36,15 +41,15 @@ const ComparisionDetails = ({ props }) => {
     <div className="flex justify-center items-center flex-col ">
       <h1 className="text-2xl text-bold mb-5">{props.title}</h1>
       <form onSubmit={handleSubmit}>
-        <div className="inputs flex gap-6 items-center justify-center">
+        <div className="flex items-center justify-around gap-4">
           <div className="input-group flex gap-2 flex-col">
             <label htmlFor="firstChannel">{props.firstInputLabel}</label>
-            <div className="relative flex justify-around items-center">
+            <div className="relative flex justify-between items-center">
               <input
                 onChange={(e) => setFirstInput(e.target.value)}
-                className="px-22 py-4 outline-none border border-gray-300 rounded-xl active:borderborder-blue-400"
+                className="px-[10vw] py-4 outline-none border border-gray-300 rounded-xl active:borderborder-blue-400"
                 type="text"
-                placeholder="Search for channel"
+                placeholder={props.inputPlaceHolder}
               />
 
               <SearchIcon
@@ -70,9 +75,9 @@ const ComparisionDetails = ({ props }) => {
             <div className="relative flex justify-around items-center">
               <input
                 onChange={(e) => setSecondInput(e.target.value)}
-                className="px-22 py-4 outline-none border border-gray-300 rounded-xl"
+                className="px-[10vw] py-4 outline-none border border-gray-300 rounded-xl"
                 type="text"
-                placeholder="Search for channel"
+                placeholder={props.inputPlaceHolder}
               />
               <SearchIcon
                 height="24"
@@ -94,14 +99,33 @@ const ComparisionDetails = ({ props }) => {
           </div>
         </div>
 
-        <div className="buttons flex justify-center items-center gap-4 mt-5">
-          <button className="bg-gray-700 font-semibold cursor-pointer rounded-xl px-5 py-2">
-            Compare Channels
+        <div className="flex justify-around gap-4">
+          {firstVideoData && <VideoDetail props={firstVideoData} />}
+          {secondVideoData && <VideoDetail props={secondVideoData} />}
+        </div>
+
+        <div className="buttons flex justify-end items-center gap-4 mt-5">
+          <button
+            onClick={() => setIsClicked(true)}
+            disabled={!firstVideoData || !secondVideoData}
+            className={`font-semibold rounded-xl px-5 py-2
+    ${
+      !firstVideoData || !secondVideoData
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-gray-800 hover:bg-gray-700 cursor-pointer"
+    }`}
+          >
+            {props.buttonTitle}
           </button>
 
           <button className="border font-semibold border-gray-400 hover:bg-gray-600 cursor-pointer rounded-xl px-5 py-2">
             Reset
           </button>
+        </div>
+
+        <div className="flex justify-around items-center m-4">
+          {isClicked && <VideoData props={firstVideoData} />}
+          {isClicked && <VideoData props={secondVideoData} />}
         </div>
       </form>
     </div>

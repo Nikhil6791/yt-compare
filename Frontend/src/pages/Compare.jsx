@@ -8,7 +8,7 @@ const Compare = () => {
   return (
     <div className="flex-1 flex justify-center items-center ">
       <div className="border flex justify-center items-center flex-col border-gray-400 rounded-xl">
-        <div className="flex justify-between items-center p-12">
+        <div className="flex justify-between items-center gap-4 w-full">
           <Card
             props={channelCardData}
             setComparisionData={setComparisionData}

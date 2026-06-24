@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function fetchVideoData(req, res) {
   // console.log("REQ", req.params);
-  const { id } = req.params;
+  // const { id } = req.params;
   console.log(id);
   try {
     const response = await axios.get(

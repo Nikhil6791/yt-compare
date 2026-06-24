@@ -1,16 +1,25 @@
 import React from "react";
-import { useContext } from "react";
-import { YTContext } from "../context/yt.context.jsx";
-const VideoDetail = () => {
-  const context = useContext(YTContext);
 
-  const { firstVideoData, secondVideoData } = context;
+const VideoDetail = ({ props }) => {
+  const { items } = props;
   return (
-    <div className="border border-gray-400">
-      <div className="flex gap-2">
-        <img src="https://i.ytimg.com/vi/ysRrzG8MU_M/default.jpg" />
-        <p>1st Mastercard IND v AUS T20I</p>
-      </div>
+    <div className="m-4">
+      {items?.map((elem) => {
+        return (
+          <div
+            className="border border-gray-400  rounded-2xl p-2 "
+            key={elem.id}
+          >
+            <div className=" flex flex-wrap justify-center items-center gap-2">
+              <img
+                src={elem.snippet.thumbnails.default.url}
+                className="rounded-2xl"
+              />
+              <p>{elem.snippet.title}</p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
