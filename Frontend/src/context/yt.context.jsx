@@ -9,6 +9,8 @@ export const YTProvider = ({ children }) => {
   const [firstChannelData, setFirstChannelData] = useState(null);
   const [secondChannelData, setSecondChannelData] = useState(null);
 
+  const [channelId, setChannelId] = useState(null);
+
   return (
     <YTContext.Provider
       value={{
@@ -20,6 +22,8 @@ export const YTProvider = ({ children }) => {
         setFirstChannelData,
         secondChannelData,
         setSecondChannelData,
+        channelId,
+        setChannelId,
       }}
     >
       {children}

@@ -1,10 +1,9 @@
 import React from "react";
 
 const VideoData = ({ props }) => {
-  const { items } = props;
   return (
     <div className="border border-gray-500 flex flex-col rounded-2xl">
-      {items?.map((elem) => {
+      {props?.items?.map((elem) => {
         return (
           <div className="p-2 ">
             <p>Views: {elem.statistics.viewCount}</p>

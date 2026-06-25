@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import SearchIcon from "@iconify-react/material-symbols/search";
 import axios from "axios";
 import { useYT } from "../hooks/useYt.js";
@@ -8,10 +8,13 @@ import VideoDetail from "./VideoDetail.jsx";
 import VideoData from "./VideoData.jsx";
 import { useNavigate } from "react-router-dom";
 
-const ComparisionDetails = ({ props }) => {
+const ComparisionDetails = ({ props, tab }) => {
   const [firstInput, setFirstInput] = useState("");
   const [secondInput, setSecondInput] = useState("");
   const [isClicked, setIsClicked] = useState(false);
+  // const { inputPlaceHolder } = props;
+  const firstButtonRef = useRef();
+  const secondButtonRef = useRef();
   const navigate = useNavigate();
   const context = useContext(YTContext);
   const {
@@ -28,25 +31,37 @@ const ComparisionDetails = ({ props }) => {
   };
 
   const resetAll = () => {
-    navigate("/compare");
+    setFirstVideoData(null);
+    setSecondVideoData(null);
+    setFirstInput("");
+    setSecondInput("");
   };
 
   const { handleYTVideoData } = useYT();
 
-  const handleYTVideoDataCaller = async (type) => {
+  const handleYTVideoDataCaller = async (e) => {
     // let input = type === "first" ? firstInput : secondInput;
     // console.log("Input", input);
-
+    // const buttonClicked = e.currentTarget.id;
     let input;
-    if (type === "first") {
+    let type;
+    if (e.currentTarget === firstButtonRef.current) {
       input = firstInput;
+      type = "first";
     } else {
       input = secondInput;
+      type = "second";
     }
 
     let linkArr = input.split("/");
     let id = linkArr[linkArr.length - 1].split("?")[0];
-    await handleYTVideoData({ id, type });
+    if (tab === "video") {
+      await handleYTVideoData({ id, type });
+    }
+
+    if (tab === "channel") {
+      await handleYTVideoData({ id, type });
+    }
   };
 
   return (
@@ -62,6 +77,7 @@ const ComparisionDetails = ({ props }) => {
                 className="px-[10vw] py-4 outline-none border border-gray-300 rounded-xl active:borderborder-blue-400"
                 type="text"
                 placeholder={props.inputPlaceHolder}
+                value={firstInput}
               />
 
               <SearchIcon
@@ -74,8 +90,9 @@ const ComparisionDetails = ({ props }) => {
                 }}
               />
               <button
+                ref={firstButtonRef}
                 type="button"
-                onClick={() => handleYTVideoDataCaller("first")}
+                onClick={handleYTVideoDataCaller}
                 className="bg-blue-600 cursor-pointer px-6 py-2 absolute right-2  rounded-2xl"
               >
                 Search
@@ -90,6 +107,7 @@ const ComparisionDetails = ({ props }) => {
                 className="px-[10vw] py-4 outline-none border border-gray-300 rounded-xl"
                 type="text"
                 placeholder={props.inputPlaceHolder}
+                value={secondInput}
               />
               <SearchIcon
                 height="24"
@@ -101,8 +119,9 @@ const ComparisionDetails = ({ props }) => {
               />
 
               <button
+                ref={secondButtonRef}
                 type="button"
-                onClick={() => handleYTVideoDataCaller("second")}
+                onClick={handleYTVideoDataCaller}
                 className="bg-blue-600 absolute cursor-pointer px-6 py-2 right-2 rounded-2xl"
               >
                 Search
@@ -111,7 +130,7 @@ const ComparisionDetails = ({ props }) => {
           </div>
         </div>
 
-        <div className="flex justify-around gap-4">
+        <div className="grid grid-cols-2 gap-4 m-4">
           {firstVideoData && <VideoDetail props={firstVideoData} />}
           {secondVideoData && <VideoDetail props={secondVideoData} />}
         </div>

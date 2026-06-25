@@ -18,3 +18,14 @@ export const fetchDataFromYoutubeApi = async ({ id }) => {
 
   // console.log(response.data);
 };
+
+export const fetchChannelDataFromYoutubeApi = async ({ id }) => {
+  try {
+    const response = await api.get(`/video/${id}`);
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    // console.log(error.response.data.error.errors);
+  }
+};

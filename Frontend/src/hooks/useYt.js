@@ -31,5 +31,9 @@ export const useYT = () => {
     }
   };
 
+  const getIdOfChannel = async (type) => {
+    // const data = wait
+  }
+
   return { handleYTVideoData };
 };
