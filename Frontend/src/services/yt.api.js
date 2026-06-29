@@ -5,6 +5,8 @@ const api = axios.create({
   withCredentials: true,
 });
 
+console.log(api.defaults.baseURL);
+
 export const fetchDataFromYoutubeApi = async ({ id }) => {
   console.log("Id", id);
   try {
@@ -19,10 +21,24 @@ export const fetchDataFromYoutubeApi = async ({ id }) => {
   // console.log(response.data);
 };
 
-export const fetchChannelDataFromYoutubeApi = async ({ id }) => {
+export const getChannelID = async ({ userName }) => {
   try {
-    const response = await api.get(`/video/${id}`);
+    const response = await api.get(`/channel/${userName}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+  console.log(response);
+};
 
+export const fetchChannelDataFromYoutubeApi = async ({ channelId }) => {
+  console.log("Frontend function called", channelId);
+
+  console.log("Channel Id", channelId);
+  try {
+    const response = await api.get(`/channel/search/${channelId}`);
+    console.log(response);
+    console.log("Calling URL:", `/channel/search/${channelId}`);
     return response.data;
   } catch (error) {
     console.log(error);

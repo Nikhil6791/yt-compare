@@ -1,6 +1,10 @@
 import { useContext } from "react";
 import { YTContext } from "../context/yt.context.jsx";
-import { fetchDataFromYoutubeApi } from "../services/yt.api.js";
+import {
+  fetchDataFromYoutubeApi,
+  getChannelID,
+  fetchChannelDataFromYoutubeApi,
+} from "../services/yt.api.js";
 export const useYT = () => {
   const context = useContext(YTContext);
 
@@ -31,9 +35,24 @@ export const useYT = () => {
     }
   };
 
-  const getIdOfChannel = async (type) => {
-    // const data = wait
-  }
+  const handleYTChannelData = async ({ userName, type }) => {
+    const data = await getChannelID({ userName });
+    console.log("Data", data);
+    const channelId = data.items[0].id.channelId;
+    // console.log("Channel Id", channelId);
 
-  return { handleYTVideoData };
+    const channelDetail = await fetchChannelDataFromYoutubeApi({ channelId });
+    console.log("Channel Data", channelDetail);
+    if (type === "first") {
+      setFirstChannelData(channelDetail);
+      console.log("First Channel Detail", firstChannelData);
+    }
+
+    if (type === "second") {
+      setSecondChannelData(channelDetail);
+      console.log("Second Channel Detail", secondChannelData);
+    }
+  };
+
+  return { handleYTVideoData, handleYTChannelData };
 };

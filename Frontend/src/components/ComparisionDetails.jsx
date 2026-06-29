@@ -37,7 +37,7 @@ const ComparisionDetails = ({ props, tab }) => {
     setSecondInput("");
   };
 
-  const { handleYTVideoData } = useYT();
+  const { handleYTVideoData, handleYTChannelData } = useYT();
 
   const handleYTVideoDataCaller = async (e) => {
     // let input = type === "first" ? firstInput : secondInput;
@@ -55,12 +55,13 @@ const ComparisionDetails = ({ props, tab }) => {
 
     let linkArr = input.split("/");
     let id = linkArr[linkArr.length - 1].split("?")[0];
+    let userName = linkArr[linkArr.length - 1].split("?")[0];
     if (tab === "video") {
       await handleYTVideoData({ id, type });
     }
 
     if (tab === "channel") {
-      await handleYTVideoData({ id, type });
+      await handleYTChannelData({ userName, type });
     }
   };
 
