@@ -8,7 +8,7 @@ const Compare = () => {
   console.log("Component rendered");
   return (
     <div className="flex-1 flex justify-center items-center m-8">
-      <div className="border flex justify-center items-center flex-col border-gray-400 rounded-xl">
+      <div className="border flex justify-center items-center flex-col border-gray-400 rounded-xl p-4">
         <div className="flex justify-between items-center gap-4 w-full">
           <Card
             props={channelCardData}
@@ -23,11 +23,9 @@ const Compare = () => {
             tab="video"
           />
         </div>
-        <div className="flex justify-center items-center p-5">
-          {comparisionData && (
-            <ComparisionDetails props={comparisionData} tab={selectedTab} />
-          )}
-        </div>
+        {comparisionData && (
+          <ComparisionDetails props={comparisionData} tab={selectedTab} />
+        )}
       </div>
     </div>
   );

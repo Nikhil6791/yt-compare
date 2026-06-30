@@ -13,19 +13,15 @@ const Card = ({ props, setComparisionData, setSelectedTab, tab }) => {
     }
   };
   return (
-    <div className="w-full m-8">
-      <div
-        onClick={handleClick}
-        className="cursor-pointer hover:border-blue-500  border border-gray-400 p-4 rounded-2xl w-full"
-      >
-        <div className="heading flex gap-2 items-center justify-center">
-          {props.icon}
-          <p className="text-xl">{props.title}</p>
-        </div>
-        <p className="text-md text-center">{props.description}</p>
+    <div
+      onClick={handleClick}
+      className="cursor-pointer hover:border-blue-500  border border-gray-400 p-4 rounded-2xl w-full"
+    >
+      <div className="heading flex gap-2 items-center justify-center">
+        {props.icon}
+        <p className="text-xl">{props.title}</p>
       </div>
-
-      {/* {comparisionData && <ComparisionDetails props={comparisionData} />} */}
+      <p className="text-md text-center">{props.description}</p>
     </div>
   );
 };

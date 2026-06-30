@@ -1,6 +1,6 @@
 import React from "react";
 
-const VideoDetail = ({ props }) => {
+const ChannelDetail = ({ props }) => {
   const { items } = props;
   return items?.map((elem) => {
     return (
@@ -17,4 +17,4 @@ const VideoDetail = ({ props }) => {
   });
 };
 
-export default VideoDetail;
+export default ChannelDetail;
